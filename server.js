@@ -1,14 +1,13 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+const cors = require("cors");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
 const teacherRouter = require("./src/Router/teacherRouter");
 const teachPositionRouter = require("./src/Router/teacherpositionRouter");
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 require("dotenv").config();
-
+app.use(cors());
 const mongoose = require("mongoose");
 mongoose
   .connect(
@@ -25,5 +24,5 @@ app.use("/api/teacher", teacherRouter);
 app.use("/api/teacher-position", teachPositionRouter);
 
 app.listen(process.env.PORT, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example app listening on port`, process.env.PORT);
 });

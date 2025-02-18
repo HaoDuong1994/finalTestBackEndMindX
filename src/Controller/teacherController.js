@@ -16,7 +16,9 @@ const teacherController = {
         });
       } else {
         //Câu 1
-        const data = await Teacher.find({});
+        const data = await Teacher.find()
+          .populate("userId")
+          .populate("teacherPositions");
         res.status(200).json({
           message: "get list teacher ok",
           data,
